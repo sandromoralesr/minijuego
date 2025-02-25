@@ -60,9 +60,9 @@ export class Game2 extends Phaser.Scene {
     createHeartObstacles() {
         const pattern = [
             "", 
-            "x      ", 
+            "xxxx      ", 
             "   ",  
-            "x       ", 
+            "xxxx       ", 
             ""
         ];
 
