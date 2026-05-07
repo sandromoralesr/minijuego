@@ -1,27 +1,49 @@
-import { Game } from './game.js';
-import { Game2 } from './game2.js';
+import { BootScene } from './scenes/BootScene.js';
+import { MenuScene } from './scenes/MenuScene.js';
+import { Level1Scene } from './scenes/Level1Scene.js';
+import { Level2Scene } from './scenes/Level2Scene.js';
+import { Level3Scene } from './scenes/Level3Scene.js';
+import { Level4Scene } from './scenes/Level4Scene.js';
+import { Level5Scene } from './scenes/Level5Scene.js';
+import { Level6Scene } from './scenes/Level6Scene.js';
+import { WinScene } from './scenes/WinScene.js';
 
 const config = {
   type: Phaser.AUTO,
-  width: window.innerWidth,  // 🔹 Usa el ancho completo de la pantalla
-  height: window.innerHeight, // 🔹 Usa el alto completo de la pantalla
+  width: window.innerWidth,
+  height: window.innerHeight,
+  backgroundColor: '#000000',
+
   physics: {
-      default: 'arcade',
-      arcade: {
-          gravity: { y: 300 },
-          debug: false
-      }
+    default: 'arcade',
+    arcade: {
+      gravity: { y: 300 },
+      debug: false
+    }
   },
-  scene: [Game, Game2], // Agrega tus escenas aquí
+
   scale: {
-      mode: Phaser.Scale.FIT, // 🔹 Ajusta el juego sin dejar bordes blancos
-      autoCenter: Phaser.Scale.CENTER_BOTH // 🔹 Centra el juego en pantalla
-  }
+    mode: Phaser.Scale.RESIZE,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    width: window.innerWidth,
+    height: window.innerHeight
+  },
+
+  scene: [
+    BootScene,
+    MenuScene,
+    Level1Scene,
+    Level2Scene,
+    Level3Scene,
+    Level4Scene,
+    Level5Scene,
+    Level6Scene,
+    WinScene
+  ]
 };
 
 const game = new Phaser.Game(config);
 
-// 🔹 Ajustar el juego al cambiar el tamaño de la ventana
 window.addEventListener('resize', () => {
   game.scale.resize(window.innerWidth, window.innerHeight);
 });
