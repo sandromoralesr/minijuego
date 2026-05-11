@@ -17,23 +17,7 @@ export class MenuScene extends Phaser.Scene {
 
     this.createAmbientGlow(width, height);
 
-    const logo = this.add.image(width / 2, height * 0.14, 'tinbetLogo')
-      .setOrigin(0.5)
-      .setAlpha(0);
-
-    const logoMaxWidth = isMobile ? width * 0.52 : 320;
-    const logoScale = logoMaxWidth / logo.width;
-    logo.setScale(logoScale);
-
-    this.tweens.add({
-      targets: logo,
-      alpha: 1,
-      y: height * 0.13,
-      duration: 550,
-      ease: 'Cubic.Out'
-    });
-
-    const title = this.add.text(width / 2, height * 0.32, 'PRUEBA TU SUERTE!', {
+    const title = this.add.text(width / 2, height * 0.28, 'PRUEBA TU SUERTE!', {
       fontFamily: '"Arial Black", Arial',
       fontSize: isMobile ? '34px' : '68px',
       fontStyle: 'bold',
@@ -54,13 +38,13 @@ export class MenuScene extends Phaser.Scene {
     this.tweens.add({
       targets: title,
       alpha: 1,
-      y: height * 0.31,
+      y: height * 0.27,
       duration: 600,
-      delay: 200,
+      delay: 150,
       ease: 'Back.Out'
     });
 
-    const levels = this.add.text(width / 2, height * 0.45, '6 NIVELES', {
+    const levels = this.add.text(width / 2, height * 0.42, '6 NIVELES', {
       fontFamily: '"Arial Black", Arial',
       fontSize: isMobile ? '24px' : '40px',
       fontStyle: 'bold',
@@ -72,14 +56,14 @@ export class MenuScene extends Phaser.Scene {
       targets: levels,
       alpha: 1,
       duration: 450,
-      delay: 450
+      delay: 350
     });
 
     const line = this.add.graphics().setAlpha(0);
     line.fillStyle(0xe51f32, 1);
     line.fillRoundedRect(
       width / 2 - (isMobile ? 90 : 150),
-      height * 0.51,
+      height * 0.49,
       isMobile ? 180 : 300,
       4,
       2
@@ -89,12 +73,12 @@ export class MenuScene extends Phaser.Scene {
       targets: line,
       alpha: 1,
       duration: 450,
-      delay: 600
+      delay: 500
     });
 
     const rewardText = this.add.text(
       width / 2,
-      height * 0.60,
+      height * 0.58,
       'COMPLETA PARA OBTENER\nTU RECOMPENSA',
       {
         fontFamily: '"Arial Black", Arial',
@@ -113,7 +97,7 @@ export class MenuScene extends Phaser.Scene {
       targets: rewardText,
       alpha: 1,
       duration: 450,
-      delay: 750
+      delay: 650
     });
 
     this.createPlayButton(width, height, isMobile);
@@ -151,7 +135,7 @@ export class MenuScene extends Phaser.Scene {
       targets: [glow, button],
       alpha: 1,
       duration: 500,
-      delay: 950
+      delay: 850
     });
 
     this.tweens.add({
@@ -162,7 +146,7 @@ export class MenuScene extends Phaser.Scene {
       yoyo: true,
       repeat: -1,
       ease: 'Sine.InOut',
-      delay: 1300
+      delay: 1200
     });
 
     button.on('pointerover', () => {

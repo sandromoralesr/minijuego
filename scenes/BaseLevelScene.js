@@ -25,6 +25,17 @@ export class BaseLevelScene extends Phaser.Scene {
     return 'desktop';
   }
 
+  // ─── Altura segura (descuenta barra de Safari iOS) ─────────────────────────
+
+  getSafeHeight() {
+    // En Safari iOS, window.innerHeight puede incluir la barra del navegador.
+    // visualViewport.height da la altura real visible.
+    if (window.visualViewport) {
+      return window.visualViewport.height;
+    }
+    return this.scale.height;
+  }
+
   // ─── Config en tiempo de ejecución (escala por categoría) ──────────────────
 
   getRuntimeLevelConfig() {
@@ -191,10 +202,14 @@ export class BaseLevelScene extends Phaser.Scene {
 
   createPlatform(width, height) {
     const cat = this.getDeviceCategory();
+
+    // Usar getSafeHeight() para que en Safari iOS la plataforma quede visible
+    const safeHeight = this.getSafeHeight();
+
     const platformY = {
-      xs:      height - 38,
-      sm:      height - 45,
-      md:      height - 52,
+      xs:      safeHeight - 52,
+      sm:      safeHeight - 58,
+      md:      safeHeight - 64,
       desktop: height - 55,
     }[cat];
 
@@ -332,9 +347,10 @@ export class BaseLevelScene extends Phaser.Scene {
   }
 
   createMobileHint(width, height) {
+    const safeHeight = this.getSafeHeight();
     const hint = this.add.text(
       width / 2,
-      height - 22,
+      safeHeight - 8,
       'Arrastra la barra para controlar el rebote',
       {
         fontFamily: 'Arial',
@@ -344,7 +360,7 @@ export class BaseLevelScene extends Phaser.Scene {
         stroke: '#000000',
         strokeThickness: 3
       }
-    ).setOrigin(0.5).setAlpha(0.85).setDepth(120);
+    ).setOrigin(0.5, 1).setAlpha(0.85).setDepth(120);
 
     this.tweens.add({
       targets: hint,
